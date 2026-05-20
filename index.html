@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTIE Startup Dashboard · KLE-CTIE</title>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<!-- ============ LOGIN GATE ============ -->
+<div id="login-gate" class="gate">
+  <div class="gate-card">
+    <div class="gate-header">
+      <div class="badge">KLE-CTIE</div>
+      <h1>Startup Directory Dashboard</h1>
+      <p class="gate-sub">Admin access required</p>
+    </div>
+    <div class="gate-body">
+      <label for="pw-input">Dashboard password</label>
+      <input id="pw-input" type="password" autocomplete="off" autofocus />
+      <button id="pw-submit">Unlock Dashboard →</button>
+      <div id="pw-error" class="pw-error" style="display:none;"></div>
+    </div>
+    <div class="footer">Made with ❤ ~rhc · EE Lab, KLE-CTIE</div>
+  </div>
+</div>
+
+<!-- ============ DASHBOARD ============ -->
+<div id="dashboard" class="dashboard" style="display:none;">
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="badge-inline">KLE-CTIE</span>
+      <h1>Startup Profile Update · 2026</h1>
+    </div>
+    <div class="topbar-right">
+      <span id="last-updated" class="last-updated"></span>
+      <button id="refresh-btn" class="ghost-btn">↻ Refresh</button>
+      <button id="export-btn" class="ghost-btn">⬇ Export CSV</button>
+    </div>
+  </header>
+
+  <!-- KPI cards -->
+  <section class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">Total Startups</div>
+      <div class="kpi-value" id="kpi-total">—</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Invitations Sent</div>
+      <div class="kpi-value" id="kpi-sent">—</div>
+      <div class="kpi-sub" id="kpi-sent-pct">—</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">CTAs Clicked</div>
+      <div class="kpi-value" id="kpi-clicked">—</div>
+      <div class="kpi-sub" id="kpi-clicked-pct">—</div>
+    </div>
+    <div class="kpi kpi-highlight">
+      <div class="kpi-label">Profiles Submitted</div>
+      <div class="kpi-value" id="kpi-submitted">—</div>
+      <div class="kpi-sub" id="kpi-submitted-pct">—</div>
+    </div>
+  </section>
+
+  <!-- Funnel + Daily Activity -->
+  <section class="row-2col">
+    <div class="card">
+      <h3>Conversion Funnel</h3>
+      <div class="funnel" id="funnel"></div>
+    </div>
+    <div class="card">
+      <h3>Daily Activity</h3>
+      <canvas id="activity-chart"></canvas>
+    </div>
+  </section>
+
+  <!-- Domain + Stage charts -->
+  <section class="row-2col">
+    <div class="card">
+      <h3>Domain Distribution</h3>
+      <canvas id="domain-chart"></canvas>
+    </div>
+    <div class="card">
+      <h3>Stage Distribution</h3>
+      <canvas id="stage-chart"></canvas>
+    </div>
+  </section>
+
+  <!-- Status table -->
+  <section class="card">
+    <div class="card-head">
+      <h3>Per-Startup Status</h3>
+      <div class="filter-row">
+        <input id="search" type="text" placeholder="Search startup or founder…">
+        <select id="status-filter">
+          <option value="all">All statuses</option>
+          <option value="submitted">✓ Submitted</option>
+          <option value="clicked">↗ Clicked, not submitted</option>
+          <option value="sent">→ Sent, not clicked</option>
+          <option value="pending">○ Not sent</option>
+        </select>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table id="status-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Startup</th>
+            <th>Founder</th>
+            <th>Email</th>
+            <th>Sent</th>
+            <th>Clicks</th>
+            <th>Submitted</th>
+          </tr>
+        </thead>
+        <tbody id="status-tbody"></tbody>
+      </table>
+    </div>
+    <div class="table-meta" id="table-meta"></div>
+  </section>
+
+  <footer class="page-footer">Made with ❤ ~rhc · EE Lab, KLE-CTIE</footer>
+</div>
+
+<!-- ============ LOADING OVERLAY ============ -->
+<div id="loading" class="loading-overlay" style="display:none;">
+  <div class="spinner"></div>
+  <div>Loading dashboard data…</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>
